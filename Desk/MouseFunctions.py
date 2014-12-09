@@ -4,9 +4,27 @@ import math
 
 win = win32api
 
-def moveMouse(x, y):
-    (x_prev, y_prev) = win.GetCursorPos()
-    win.SetCursorPos((x+x_prev, y+y_prev))
+def move(x,y):
+    #click, rightClick, press, rightPress, release, rightRelease, move
+    win.mouse_event(win32con.MOUSEEVENTF_MOVE, x, y, 0, 0)
 
-def rightClick():
-    win.mouse_event(win32con.MOUSEEVENTF_MOVE, 100, 100, 0, 0)
+def click():
+    win.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+    win.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+
+def rClick():
+    win.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0)
+    win.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0)
+
+def press():
+    win.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+
+def rPress():
+    win.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0)
+
+def release():
+    win.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+
+def rRelease():
+    win.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0)
+    

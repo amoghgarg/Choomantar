@@ -3,7 +3,7 @@ import sys
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_address = ('localhost', 10000)
+server_address = ('localhost', 10005)
 print >>sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 
@@ -17,17 +17,16 @@ while True:
         print >>sys.stderr, 'connection from', client_address
 
         # Receive the data in small chunks and retransmit it
-        while True:
+        while True:            
+            print "Waiting for data"
             data = connection.recv(16)
-            #print >>sys.stderr, 'received "%s"' % data
             if data:
                 print >>sys.stderr, 'received "%s"' % data
-                #connection.sendall(data)
-            #else:
-                #print >>sys.stderr, 'no data', client_address
-                #break
+                connection.sendall(data)
+            else:                
+                break
             
     finally:
         # Clean up the connection
         connection.close()
-        print>>'Closing Connection'
+        print 'Closing Connection'

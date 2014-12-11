@@ -1,28 +1,26 @@
 import socket
 import sys
+import msvcrt
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server_address = ('localhost', 10005)
+print 'portNo please'
+port = input();
+print 'ip please'
+address = raw_input();
+server_address = (address, port)
 
 print 'Connecting to the server'
 
 sock.connect(server_address)
 
 try:
-    mess = 'Some'
-    for i in range(1,5):
-        sock.sendall(mess)
-
-        rec = 0;
-        rec_exp  = len(mess)
-
-        
-        data = sock.recv(16)
-        rec_exp += len(data)
-        print rec
-        print rec_exp
-        print data
+    char  = msvcrt.getche();
+    while (char!='q'):
+        sock.sendall(char)
+        print char
+        char  = msvcrt.getche();
+    sock.sendall(char)
 
 finally:
     print 'closing'
